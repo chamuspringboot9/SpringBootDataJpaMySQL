@@ -111,10 +111,37 @@ public class ConsoleRunner implements CommandLineRunner {
 		p.setProdCost(2.1);
 		Example<Product> ex3=Example.of(p);
 		repo.findAll(ex3, PageRequest.of(0, 2)).forEach(System.out::println);
-		*/
+		
 		
 		//12. findAllById()
 		
 		repo.findAllById(Arrays.asList(101,103)).forEach(System.out::println);
-}
+
+		
+		// 13. Select Operations
+		
+		//13.1    Select * from Product where pcode=?
+		
+		repo.findByProdCode("CCC").forEach(System.out::println);
+
+
+		//13.2    Select * from Product where pcost<?, where pcost<=?
+		
+		//repo.findByProdCostLessThan(5.1);
+		repo.findByProdCostLessThanEqual(3.1);
+		
+		
+		//13.3   Select * from Product where pcode=? or pcost<?
+		
+		System.out.println(repo.findByProdCodeOrProdCostLessThan("BBB",2.1));
+
+	
+		//13.4   Select * from Product where pcode is not null
+		System.out.println(repo.findByProdCodeIsNotNull("How"));
+		*/
+		
+		//13.5   Select * from Product where pcode like '%A%' (having letter A)
+		
+		System.out.println(repo.findByProdCodeLike("%A%"));
+	}
 }
